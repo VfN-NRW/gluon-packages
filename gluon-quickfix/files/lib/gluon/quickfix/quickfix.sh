@@ -43,6 +43,8 @@ dmesg | grep -q "Kernel bug" && now_reboot "gluon issue #680"
 # ath/ksoftirq-malloc-errors (upcoming oom scenario)
 dmesg | grep "ath" | grep "alloc of size" | grep -q "failed" && now_reboot "ath0 malloc fail"
 dmesg | grep "ksoftirqd" | grep -q "page allcocation failure" && now_reboot "kernel malloc fail"
+dmesg | grep "ieee80211" | grep "failed to reallocate TX buffer" && now_reboot "phy tx buffer alloc fail"
+dmesg | grep "ieee80211" | grep "failed to copy skb for" && now_reboot "phy skb copy fail"
 
 # br-client without ipv6 in prefix-range
 if [ "$(ip -6 addr show to "$(jsonfilter -i /lib/gluon/site.json -e '$.prefix6')" dev br-client | grep -c inet6)" = "0" ]; then
