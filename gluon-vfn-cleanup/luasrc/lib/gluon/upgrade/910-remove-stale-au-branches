@@ -1,0 +1,7 @@
+#!/usr/bin/lua
+
+local uci = require('simple-uci').cursor()
+
+-- Remove stale branches from old firmware
+uci:delete('autoupdater', 'rc')
+uci:save('autoupdater')

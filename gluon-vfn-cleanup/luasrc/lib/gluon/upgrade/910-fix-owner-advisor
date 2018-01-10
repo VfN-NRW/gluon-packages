@@ -1,0 +1,13 @@
+#!/usr/bin/lua
+
+local uci = require('simple-uci').cursor()
+
+local owner = uci:get_first('gluon-node-info', 'owner')
+local advisor = uci:get_first('gluon-node-info', 'advisor')
+local owner_contact = uci:get('gluon-node-info', owner, 'contact')
+local advisor_contact = uci:get('gluon-node-info', advisor, 'contact')
+
+uci:set('gluon-node-info', owner, 'contact', owner_contact or advisor_contact)
+uci:delete_all('gluon-node-info', 'advisor')
+
+uci:save('gluon-node-info')

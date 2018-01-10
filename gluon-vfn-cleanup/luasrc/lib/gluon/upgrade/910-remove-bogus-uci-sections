@@ -1,0 +1,7 @@
+#!/usr/bin/lua
+
+local uci = require('simple-uci').cursor()
+
+-- Remove bogus gluon-node-info section
+uci:delete_all('gluon-node-info', 'void')
+uci:save('gluon-node-info')

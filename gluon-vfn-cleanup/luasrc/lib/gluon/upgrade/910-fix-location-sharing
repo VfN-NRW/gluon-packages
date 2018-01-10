@@ -1,0 +1,12 @@
+#!/usr/bin/lua
+
+local uci = require('simple-uci').cursor()
+
+local location = uci:get_first('gluon-node-info', 'location')
+local userdef_location = uci:get_bool('gluon-node-info', location, 'user_defined_location')
+local share_location = uci:get_bool('gluon-node-info', location, 'share_location')
+
+uci:set('gluon-node-info', location, 'share_location', userdef_location or share_location)
+uci:delete('gluon-node-info', location, 'user_defined_location')
+
+uci:save('gluon-node-info')
