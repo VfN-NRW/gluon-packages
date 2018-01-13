@@ -2,14 +2,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gluon-vfn-cleanup
 PKG_VERSION:=1
-PKG_RELEASE:=$(GLUON_BRANCH)
 
 PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
-include $(GLUONDIR)/include/package.mk
+include $(TOPDIR)/../package/gluon.mk
 
 
-define Package/$(PKG_BUILD_DIR)
+define Package/$(PKG_NAME)
   SECTION:=gluon
   CATEGORY:=Gluon
   DEPENDS:=+gluon-core
@@ -24,11 +23,11 @@ define Build/Compile
 	$(call GluonSrcDiet,./luasrc,$(PKG_BUILD_DIR)/luadest/)
 endef
 
-define Package/$(PKG_BUILD_DIR)/install
+define Package/$(PKG_NAME)/install
 	$(CP) $(PKG_BUILD_DIR)/luadest/* $(1)/
 endef
 
-define Package/$(PKG_BUILD_DIR)/postinst
+define Package/$(PKG_NAME)/postinst
 endef
 
-$(eval $(call BuildPackage,$(PKG_BUILD_DIR)))
+$(eval $(call BuildPackage,$(PKG_NAME)))
