@@ -9,7 +9,7 @@ CUR_LON=$(uci get gluon-node-info.@location[0].longitude)
 CUR_LAT=$(uci get gluon-node-info.@location[0].latitude)
 
 CHANGED=""
-DB_RESULT=$(wget -q -O - http://nodeapi.vfn-nrw.de/index.php/get/node/byGluonPrimaryMac/${PRIMARY_MAC})
+DB_RESULT="$(wget -q -O - "http://nodeapi.vfn-nrw.de/index.php/get/node/byGluonPrimaryMac/${PRIMARY_MAC}" || wget -q -O - "http://nodeapi.vfn/api/get/node/byGluonPrimaryMac/${PRIMARY_MAC}")"
 
 json_load "$DB_RESULT"
 
