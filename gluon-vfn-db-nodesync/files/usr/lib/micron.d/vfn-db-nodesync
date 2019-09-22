@@ -1,1 +1,0 @@
-28 * * * * /bin/sh /lib/gluon/vfn-db-nodesync/vfn-db-nodesync.sh
